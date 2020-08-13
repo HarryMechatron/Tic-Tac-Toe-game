@@ -1,4 +1,4 @@
-# Tic-Tac-Toe-
+# Tic-Tac-Toe-game
 A classical Tic Tac Toe game with 2 players
 
 #How to use?
