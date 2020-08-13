@@ -36,5 +36,23 @@ def get_player_info():
 	print(f"Hi {player2}, your symbol is 'O'")
 	return player1, player2
 
-print_intro()
-get_player_info()
+def check_winning_pattern(player_pattern):
+        winning_patterns = [{1, 2, 3}, {4, 5, 6}, {7, 8, 9},
+                            {1, 4, 7}, {2, 5, 8}, {3, 6, 9},
+                            {1, 5, 9}, {3, 5, 7}]
+        for pattern in winning_patterns:
+                if pattern.issubset(player_pattern):
+                        return True
+
+while True:
+        # Printing the game intor and the board with index
+        print_intro()
+
+        # Getting the player info
+        get_player_info()
+
+        # Getting input from player
+        # Validating Input
+        if check_winning_pattern({1,2,3}):
+                print("Game Over")
+                break
