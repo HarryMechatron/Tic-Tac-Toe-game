@@ -19,7 +19,7 @@ def print_intro():
 	output   : -
 	function : Printing the intro with the initial board positions
 	'''
-	print("Welcome to Tic Tac Toe game!")
+	print("\nWelcome to Tic Tac Toe game!")
 	print("\n")
 	print("The board with initial position is: ")
 	display_board([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -31,22 +31,34 @@ def get_player_info():
 	function : Get the two player names from user 
 	'''
 	player1 = input("Player 1: Enter your name: ")
-	print(f"Hi {player1}, your symbol is 'X'")
+	print(f"Hi {player1}, your symbol is 'X'\n")
 	player2 = input("Player 2: Enter your name: ")
-	print(f"Hi {player2}, your symbol is 'O'")
+	print(f"Hi {player2}, your symbol is 'O'\n")
 	return player1, player2
 
 def check_winning_pattern(player_pattern):
+        '''
+        input    : A list (len = 9) containing current visual
+        output   : True if the pattern matches with a winning pattern
+        function : There is 8 winning patterns. If any players input
+                   matches with the winning sequence return True else False
+        '''
         winning_patterns = [{1, 2, 3}, {4, 5, 6}, {7, 8, 9},
                             {1, 4, 7}, {2, 5, 8}, {3, 6, 9},
                             {1, 5, 9}, {3, 5, 7}]
         for pattern in winning_patterns:
                 if pattern.issubset(player_pattern):
                         return True
+        return False
 
 def get_inputs(player_name, player1_set, player2_set):
+        '''
+        input    : player's name, player 1 set, player 2 set
+        output   : the valid index
+        function : reads the player's input and check weather it is valid
+        '''
         while True:
-                index = input("Enter a valid index: ")
+                index = input(f"Enter a valid index, {player_name}: ")
                 if not index.isdigit():
                         print(f"{index} is not an index, enter an integer!")
                         continue
@@ -91,3 +103,7 @@ while True:
                 if check_winning_pattern(player2_set):
                         print("Game over")
                         break
+
+        print("Would you like to play another game?")
+        if not input("Type 'Y' for to play again: ").lower() == 'y':
+                break
