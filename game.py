@@ -71,13 +71,23 @@ while True:
         # Players patterns
         player1_set = set()
         player2_set = set()
+        pattern = []
+        for i in range(9):
+                pattern.append(' ')
 
         # Getting input from player
         for i in range(5):
-                player1_set.add(get_inputs(player1, player1_set, player2_set))
-                player2_set.add(get_inputs(player2, player1_set, player2_set))
-                
-        # Validating Input
-        if check_winning_pattern({1,2,3}):
-                print("Game Over")
-                break
+                p1 = get_inputs(player1, player1_set, player2_set)
+                player1_set.add(p1)
+                pattern[p1-1] = 'X'
+                display_board(pattern)
+                if check_winning_pattern(player1_set):
+                        print("Game over")
+                        break
+                p2 = get_inputs(player2, player1_set, player2_set)
+                player2_set.add(p2)
+                pattern[p2-1] = 'O'
+                display_board(pattern)
+                if check_winning_pattern(player2_set):
+                        print("Game over")
+                        break
