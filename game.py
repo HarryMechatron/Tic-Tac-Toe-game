@@ -44,14 +44,39 @@ def check_winning_pattern(player_pattern):
                 if pattern.issubset(player_pattern):
                         return True
 
+def get_inputs(player_name, player1_set, player2_set):
+        while True:
+                index = input("Enter a valid index: ")
+                if not index.isdigit():
+                        print(f"{index} is not an index, enter an integer!")
+                        continue
+                index = int(index)
+                if index < 1 or index > 9:
+                        print(f"{index} is out of range, enter within range")
+                        continue
+                if index in player1_set or index in player2_set:
+                        print(f"{index} is already taken, enter another index")
+                        continue
+                return index
+        
+        
+
 while True:
         # Printing the game intor and the board with index
         print_intro()
 
         # Getting the player info
-        get_player_info()
+        player1, player2 = get_player_info()
+
+        # Players patterns
+        player1_set = set()
+        player2_set = set()
 
         # Getting input from player
+        for i in range(5):
+                player1_set.add(get_inputs(player1, player1_set, player2_set))
+                player2_set.add(get_inputs(player2, player1_set, player2_set))
+                
         # Validating Input
         if check_winning_pattern({1,2,3}):
                 print("Game Over")
